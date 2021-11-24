@@ -28,7 +28,7 @@ public class CustomerController {
     private ICustomerService customerService;
 
     @GetMapping
-    public ResponseEntity<Page<Customer>> findAll(@RequestParam(name = "q") Optional<String> q, @PageableDefault Pageable pageable) {
+    public ResponseEntity<Page<Customer>> findAll(@RequestParam(name = "q") Optional<String> q, @PageableDefault(size = 5) Pageable pageable) {
         Page<Customer> customerPage;
         if (q.isPresent()) {
             customerPage = customerService.findAllByLastNameContaining(q.get(), pageable);
