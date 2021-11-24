@@ -40,10 +40,7 @@ public class CustomerController {
     @GetMapping("/{id}")
     public ResponseEntity<Customer> findById(@PathVariable Long id) {
         Optional<Customer> customerOptional = customerService.findById(id);
-        if (!customerOptional.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(customerOptional.get(), HttpStatus.OK);
+        return customerOptional.map(customer -> new ResponseEntity<>(customer, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping
