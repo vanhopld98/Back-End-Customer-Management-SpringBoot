@@ -46,7 +46,7 @@ public class CustomerController {
         return new ResponseEntity<>(customerOptional.get(), HttpStatus.OK);
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<Customer> create(CustomerForm customerForm) throws IOException {
         MultipartFile multipartFile = customerForm.getAvatar();
         String fileName = multipartFile.getOriginalFilename();
